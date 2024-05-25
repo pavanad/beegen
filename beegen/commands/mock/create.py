@@ -61,15 +61,15 @@ class CreateCommand(BaseCommand):
                 },
                 {
                     "method": "POST",
-                    "path": "/users",
-                    "response": {
-                        "status": 201,
+                    "path": "/user",
+                    "request": {
                         "body": {
                             "id": 3,
                             "name": "New User",
                             "email": "new.user@example.com",
-                        },
+                        }
                     },
+                    "response": {"status": 201, "body": {"status": "created"}},
                 },
             ],
         }
