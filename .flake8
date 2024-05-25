@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 88
+ignore = E305, W503
+exclude =
+    .git
+    __pycache__
+    .pytest_cache
+    .vscode
+    app/__init__.py
