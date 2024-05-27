@@ -11,7 +11,7 @@ class AboutCommand(Command):
         title = custom_fig.renderText("BeeGen")
         self.line(
             f"\n<fg=yellow>{title}</><fg=green>"
-            "BeeGen is an intelligent command-line tool designed to assist developers \n"
+            "BeeGen is an intelligent command-line tool designed to assist developers\n"
             "with everyday tasks, leveraging the power of generative AI."
             "</>\n\n"
         )
