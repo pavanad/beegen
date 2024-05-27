@@ -1,3 +1,5 @@
+import secrets
+
 import yaml
 from cleo.helpers import argument
 
@@ -33,16 +35,21 @@ class CreateCommand(BaseCommand):
 
     def __get_mockfile(self) -> dict:
         return {
-            "version": "1.0",
-            "name": "beegen",
+            "version": "0.1.0",
+            "name": "BeeGen API",
             "host": "0.0.0.0",
             "port": 8000,
-            "workers": 2,
-            "description": "BeeGen API mockfile",
+            "description": "BeeGen mockfile API example",
+            "authentication": {
+                "type": "api_key",
+                "key": secrets.token_urlsafe(32),
+                "name": "X-API-Key",
+            },
             "endpoints": [
                 {
                     "method": "GET",
                     "path": "/users",
+                    "access": "public",
                     "response": {
                         "status": 200,
                         "body": [
@@ -62,13 +69,24 @@ class CreateCommand(BaseCommand):
                 {
                     "method": "POST",
                     "path": "/user",
-                    "request": {
-                        "body": {
-                            "id": 3,
-                            "name": "New User",
-                            "email": "new.user@example.com",
-                        }
-                    },
+                    "access": "protected",
+                    "request": [
+                        {
+                            "name": "id",
+                            "type": "int",
+                            "description": "The user ID",
+                        },
+                        {
+                            "name": "name",
+                            "type": "str",
+                            "description": "The user name",
+                        },
+                        {
+                            "name": "email",
+                            "type": "str",
+                            "description": "The user email",
+                        },
+                    ],
                     "response": {"status": 201, "body": {"status": "created"}},
                 },
             ],

@@ -1,7 +1,10 @@
+import json
 import os
+import pathlib
 
 import yaml
 from cleo.helpers import argument
+from jsonschema import validate
 
 from beegen.commands.base import BaseCommand
 from beegen.services.mock import MockService
@@ -32,7 +35,12 @@ class RunCommand(BaseCommand):
             self.line("")
             return
 
+        schema = self.__read_schema()
         mockfile = self.__read_mockfile(filename)
+
+        self.line_prefix("Validating mockfile...")
+        validate(mockfile, schema)
+
         self.line_prefix("Starting mock API server...")
         self.line("")
 
@@ -48,3 +56,12 @@ class RunCommand(BaseCommand):
         self.line_prefix(f"Mockfile <comment>{filename}</comment> read!")
 
         return mockfile
+
+    def __read_schema(self) -> dict:
+        current_path = pathlib.Path(__file__).parent.resolve()
+        filename = f"{current_path}/schema.json"
+
+        with open(filename, "r") as f:
+            schema = json.load(f)
+
+        return schema
