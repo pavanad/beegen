@@ -1,7 +1,7 @@
 import os
 from configparser import ConfigParser
 
-CONFIG_FILENAME = "config"
+CONFIG_FILENAME = "config.ini"
 CONFIG_ROOT_PATH = os.path.join(os.path.expanduser("~"), ".beegen")
 
 
