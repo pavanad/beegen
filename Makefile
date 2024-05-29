@@ -2,6 +2,8 @@
 
 .DEFAULT: help
 
+export PYTHONPATH = $PYTHONPATH:$(shell pwd)
+
 help:
 	@echo "\nUsage:"
 	@echo "make <command>"
@@ -12,7 +14,6 @@ help:
 
 run:
 	@echo "\n> Running project";\
-	export PYTHONPATH=$(shell pwd):$PYTHONPATH;\
 	python beegen/ $(param);\
 
 clean:

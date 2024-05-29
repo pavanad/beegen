@@ -6,7 +6,7 @@ from cleo.helpers import argument
 from beegen.commands.base import BaseCommand
 
 
-class CreateCommand(BaseCommand):
+class MockCreateCommand(BaseCommand):
     name = "mock create"
     description = "Generate a mockfile to configure the mock API."
 
