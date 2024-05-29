@@ -10,7 +10,7 @@ from beegen.commands.base import BaseCommand
 from beegen.services.mock import MockService
 
 
-class RunCommand(BaseCommand):
+class MockRunCommand(BaseCommand):
     name = "mock run"
     description = "Run the mock API server using the mockfile."
 

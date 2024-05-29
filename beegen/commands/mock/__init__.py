@@ -1,4 +1,4 @@
-from .create import CreateCommand
-from .run import RunCommand
+from .create import MockCreateCommand
+from .run import MockRunCommand
 
-__all__ = [CreateCommand, RunCommand]
+__all__ = [MockCreateCommand, MockRunCommand]
