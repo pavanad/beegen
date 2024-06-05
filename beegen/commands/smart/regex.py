@@ -1,11 +1,7 @@
 from cleo.helpers import argument, option
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables.base import RunnableSequence
-from rich.console import Console
-from rich.markdown import Markdown
 
 from beegen.commands.smart.base import SmartBaseCommand
+from beegen.commands.smart.core.chain import load_chain
 
 
 class SmartRegexCommand(SmartBaseCommand):
@@ -22,10 +18,6 @@ class SmartRegexCommand(SmartBaseCommand):
         )
     ]
 
-    def __init__(self) -> None:
-        super().__init__()
-        self.__console = Console()
-
     def handle(self) -> int:
         self.line("")
         self.line_prefix(
@@ -38,22 +30,17 @@ class SmartRegexCommand(SmartBaseCommand):
         self.line_prefix("Generating a regex based on the provided value...")
 
         try:
-            with self.__console.status("") as _:
-                chain = self.__load_chain()
+            with self.console.status("") as _:
+                template = self.__get_template_regex()
+                chain = load_chain(template, self.provider.chat_model)
                 response = chain.invoke({"value": value, "language": language})
 
             self.line_prefix("Model response:\n")
-            self.__print_response(response)
+            self.print_markdown(response)
         except Exception:
             self.line_prefix("<error>An error occurred while generating the regex.</>")
 
         self.line("")
-
-    def __load_chain(self) -> RunnableSequence:
-        template = self.__get_template_regex()
-        prompt = ChatPromptTemplate.from_template(template)
-        chain = prompt | self.provider.chat_model | StrOutputParser()
-        return chain
 
     def __get_template_regex(self) -> str:
         return """
@@ -70,7 +57,3 @@ class SmartRegexCommand(SmartBaseCommand):
         Reminder: Return only the regex and, if the user requests, the example
         in the specified language without any comments.
         """
-
-    def __print_response(self, response: str):
-        markdown = Markdown(response)
-        self.__console.print(markdown)
