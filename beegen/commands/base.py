@@ -19,7 +19,7 @@ class BaseCommand(Command):
 
     def ask_prefix(self, question: str, default: Any) -> Any:
         question = self.PREFIX + question if question else ""
-        self.ask(question, default)
+        return self.ask(question, default)
 
     def print_markdown(self, text: str):
         markdown = Markdown(text)

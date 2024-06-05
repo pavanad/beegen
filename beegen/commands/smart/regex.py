@@ -1,9 +1,7 @@
 from cleo.helpers import argument, option
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables.base import RunnableSequence
 
 from beegen.commands.smart.base import SmartBaseCommand
+from beegen.commands.smart.core.chain import load_chain
 
 
 class SmartRegexCommand(SmartBaseCommand):
@@ -33,22 +31,16 @@ class SmartRegexCommand(SmartBaseCommand):
 
         try:
             with self.console.status("") as _:
-                chain = self.__load_chain()
+                template = self.__get_template_regex()
+                chain = load_chain(template, self.provider.chat_model)
                 response = chain.invoke({"value": value, "language": language})
 
             self.line_prefix("Model response:\n")
             self.print_markdown(response)
-        except Exception as error:
-            print(f"{error}")
+        except Exception:
             self.line_prefix("<error>An error occurred while generating the regex.</>")
 
         self.line("")
-
-    def __load_chain(self) -> RunnableSequence:
-        template = self.__get_template_regex()
-        prompt = ChatPromptTemplate.from_template(template)
-        chain = prompt | self.provider.chat_model | StrOutputParser()
-        return chain
 
     def __get_template_regex(self) -> str:
         return """
