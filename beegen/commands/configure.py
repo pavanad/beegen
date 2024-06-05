@@ -17,11 +17,11 @@ class ConfigureCommand(BaseCommand):
             ["Ollama", "OpenAI", "Google"],
             0,
         )
-        model_name = self.ask(f"{self.PREFIX}Model name:", "llama3")
+        model_name = self.ask_prefix("Model name:", "llama3")
 
         api_key = ""
         if provider != "Ollama":
-            api_key = self.ask(f"{self.PREFIX}API key:", "")
+            api_key = self.ask_prefix("API key:", "")
 
         self.line("")
 

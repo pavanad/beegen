@@ -31,19 +31,17 @@ class SnippetsAddCommand(SnippetsBaseCommand):
 
         name = self.argument("name")
         if not name:
-            name = self.ask(
-                f"{self.PREFIX}Snippet name:", f"snippet-{str(uuid.uuid4())[:4]}"
-            )
+            name = self.ask_prefix("Snippet name:", f"snippet-{str(uuid.uuid4())[:4]}")
 
-        description = self.ask(
-            f"{self.PREFIX}Description:", "Description default of the snippet"
+        description = self.ask_prefix(
+            "Description:", "Description default of the snippet"
         )
 
         snippet_code = self.option("code")
         snippet_file = self.option("file")
 
         if not any([snippet_code, snippet_file]):
-            snippet_code = self.ask(f"{self.PREFIX}Snippet code:")
+            snippet_code = self.ask_prefix("Snippet code:")
 
         if snippet_file:
             snippet_file_path = os.path.abspath(snippet_file)

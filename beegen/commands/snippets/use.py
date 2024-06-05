@@ -19,12 +19,13 @@ class SnippetsUseCommand(SnippetsBaseCommand):
             snippet = self.__get_snippet(name)
             if snippet.get("code"):
                 self.line_prefix("Code:\n")
-                self.line(snippet.get("code"))
+                code = f"```\n{snippet.get('code')}\n```"
+                self.print_markdown(code)
             else:
                 self.line_prefix(
                     "The snippet is of type file, please specify the output file."
                 )
-                filename = self.ask(f"{self.PREFIX}Output file:", "snippet.out")
+                filename = self.ask_prefix("Output file:", "snippet.out")
                 self.__save_output_file(filename, snippet)
                 self.line_prefix(f"Snippet saved to <info>{filename}</>")
         else:
