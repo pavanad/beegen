@@ -1,19 +1,6 @@
-"""
-Para gerar o readme colete informações sobre a estrutura do projeto.
-
-Solicite ao usuário que informe os arquivos com configurações
-importantes do projeto para melhorar o contexto da ferramenta
-
-1. Colete a estrutura de arquivos e diretórios
-2. Solicite para a LLM identificar a linguagem pelos arquivos
-3. Ainda preciso validar se apenas isso será suficiente ou se preciso entregar
-o conteudo do arquivo para a LLM usar como contexto
-4. Solicite para a LLM tentar descrever cada arquivo
-"""
-
 import os
 
-from cleo.helpers import argument
+from cleo.helpers import argument, option
 
 from beegen.commands.smart.base import SmartBaseCommand
 from beegen.commands.smart.core.chain import load_chain
@@ -24,6 +11,15 @@ class SmartReadmeCommand(SmartBaseCommand):
     description = "Automatically generate a detailed README file for your project."
 
     arguments = [argument("project_path", description="The path to the project")]
+
+    options = [
+        option(
+            long_name="language",
+            short_name="l",
+            description="Define the language for generating a readme file.",
+            flag=False,
+        )
+    ]
 
     def handle(self) -> int:
         self.line("")
@@ -45,13 +41,14 @@ class SmartReadmeCommand(SmartBaseCommand):
             "Loading model(LLM) from provider "
             f"<comment>{self.provider.provider_name}</>"
         )
+        language = self.option("language") or "English"
         project_files = self.ask_prefix("Project files:", "")
         if not project_files:
             self.line_prefix("<error>No project files provided.</>")
             if self.confirm(
                 f"{self.PREFIX}Do you like to continue without project files?", False
             ):
-                self.__generate_readme(project_path, {})
+                self.__generate_readme(project_path, {}, language)
                 return
 
             self.line("")
@@ -59,9 +56,9 @@ class SmartReadmeCommand(SmartBaseCommand):
 
         self.line_prefix("Loading project files...")
         context_files = self.__get_context_files(project_path, project_files)
-        self.__generate_readme(project_path, context_files)
+        self.__generate_readme(project_path, context_files, language)
 
-    def __generate_readme(self, path: str, context_files: dict):
+    def __generate_readme(self, path: str, context_files: dict, language: str):
         try:
             self.line_prefix("Generating README...")
             with self.console.status("") as _:
@@ -71,7 +68,7 @@ class SmartReadmeCommand(SmartBaseCommand):
                 readme_text = chain.invoke(
                     {
                         "project_details": project_details,
-                        "language": "English",
+                        "language": language,
                         "context_files": context_files,
                     }
                 )
