@@ -12,6 +12,7 @@ from .commands.snippets import (
     SnippetsRemoveCommand,
     SnippetsUseCommand,
 )
+from .commands.utils import UtilsChatCommand
 from .config import settings
 
 try:
@@ -44,5 +45,6 @@ class Application(BaseApplication):
             ConfigureCommand(),
             SmartRegexCommand(),
             SmartReadmeCommand(),
+            UtilsChatCommand(),
         ]
         return commands

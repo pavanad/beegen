@@ -20,6 +20,8 @@ langchain-community = "^0.2.1"
 langchain-google-genai = "^1.0.5"
 langchain-openai = "^0.1.8"
 rich = "^13.7.1"
+streamlit = "^1.35.0"
+streamlit-ace = "^0.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
