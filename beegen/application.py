@@ -5,7 +5,11 @@ from cleo.application import Application as BaseApplication
 from .commands.about import AboutCommand
 from .commands.configure import ConfigureCommand
 from .commands.mock import MockCreateCommand, MockRunCommand
-from .commands.smart import SmartReadmeCommand, SmartRegexCommand
+from .commands.smart import (
+    SmartCreateVectorStoreCommand,
+    SmartReadmeCommand,
+    SmartRegexCommand,
+)
 from .commands.snippets import (
     SnippetsAddCommand,
     SnippetsListCommand,
@@ -45,6 +49,7 @@ class Application(BaseApplication):
             ConfigureCommand(),
             SmartRegexCommand(),
             SmartReadmeCommand(),
+            SmartCreateVectorStoreCommand(),
             UtilsChatCommand(),
         ]
         return commands

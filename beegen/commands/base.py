@@ -3,6 +3,7 @@ from typing import Any
 from cleo.commands.command import Command
 from rich.console import Console
 from rich.markdown import Markdown
+from rich.syntax import Syntax
 
 
 class BaseCommand(Command):
@@ -24,3 +25,7 @@ class BaseCommand(Command):
     def print_markdown(self, text: str):
         markdown = Markdown(text)
         self.console.print(markdown)
+
+    def print_code(self, text: str, language: str = "python"):
+        syntax = Syntax(text, language, dedent=True)
+        self.console.print(syntax)
