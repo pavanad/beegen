@@ -9,6 +9,7 @@ from .commands.smart import (
     SmartCreateVectorStoreCommand,
     SmartReadmeCommand,
     SmartRegexCommand,
+    SmartTranslateCommand,
 )
 from .commands.snippets import (
     SnippetsAddCommand,
@@ -50,6 +51,7 @@ class Application(BaseApplication):
             SmartRegexCommand(),
             SmartReadmeCommand(),
             SmartCreateVectorStoreCommand(),
+            SmartTranslateCommand(),
             UtilsChatCommand(),
         ]
         return commands
