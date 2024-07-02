@@ -21,7 +21,7 @@ clean:
 	find . -name '*.pyc' -exec rm --force {} +;\
 	find . -name '*.pyo' -exec rm --force {} +;\
 	find . | grep -E "__pycache__|.pyc" | xargs rm -rf;\
-	rm -f logs/grace_service.log;\
+	rm -rf dist/;\
 
 lint:
 	@echo "\n> Check python code PEP 8\n";\

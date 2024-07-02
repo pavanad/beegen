@@ -27,7 +27,7 @@ class SnippetsUseCommand(SnippetsBaseCommand):
                 )
                 filename = self.ask_prefix("Output file:", "snippet.out")
                 self.__save_output_file(filename, snippet)
-                self.line_prefix(f"Snippet saved to <info>{filename}</>")
+                self.line_prefix(f"Snippet saved to <comment>{filename}</>")
         else:
             self.line_prefix(f"Snippet <error>{name}</> not found")
         self.line("")

@@ -15,4 +15,6 @@ class UtilsChatCommand(BaseCommand):
         two_levels_up = os.path.dirname(os.path.dirname(current_dir))
 
         app_path = os.path.join(two_levels_up, "services", "chat", "app.py")
-        subprocess.run(["streamlit", "run", app_path])
+        subprocess.run(
+            ["streamlit", "run", "--client.showSidebarNavigation=False", app_path]
+        )
