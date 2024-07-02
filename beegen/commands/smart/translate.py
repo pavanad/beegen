@@ -18,6 +18,7 @@ class SmartTranslateCommand(SmartBaseCommand):
             short_name="l",
             description="Set the language for text translation.",
             flag=False,
+            default="English",
         ),
         option(
             long_name="file",
@@ -36,7 +37,7 @@ class SmartTranslateCommand(SmartBaseCommand):
             self.line_prefix("<error>Please provide a text or file to translate.</>\n")
             return
 
-        language = self.option("language") or "English"
+        language = self.option("language")
         self.line_prefix(f"Translating text into <comment>{language}</>.")
 
         try:
