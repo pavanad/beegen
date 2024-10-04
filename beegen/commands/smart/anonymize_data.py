@@ -1,4 +1,6 @@
-from cleo.helpers import argument
+import os
+
+from cleo.helpers import argument, option
 
 from beegen.commands.smart.base import SmartBaseCommand
 from beegen.commands.smart.core.chain import load_chain
@@ -11,7 +13,8 @@ class SmartAnonymizeCommand(SmartBaseCommand):
         "ensure privacy by masking identifiable information."
     )
 
-    arguments = [argument("text", "The text to anonymize.")]
+    arguments = [argument("text", "The text to anonymize.", optional=True)]
+    options = [option("file", "f", description="Define text file", flag=False)]
 
     def handle(self) -> int:
         self.line("")
@@ -21,18 +24,51 @@ class SmartAnonymizeCommand(SmartBaseCommand):
         )
 
         text = self.argument("text")
-        try:
-            with self.console.status("") as _:
-                template = self.__get_template_anonymize()
-                chain = load_chain(template, self.provider.chat_model)
-                response = chain.invoke({"text": text})
+        text_file = self.option("file")
 
-            self.line_prefix("Anonymized text:\n")
-            self.print_markdown(f"```\n{response}\n```")
+        if not any([text, text_file]):
+            self.line_prefix("Please provide a text or a text file for anonymization")
+            self.line("")
+            return
+
+        try:
+            if text:
+                with self.console.status("") as _:
+                    response = self.__anonymize_text(text)
+                self.line_prefix("Anonymized text:\n")
+                self.print_markdown(f"```\n{response}\n```")
+
+            if text_file:
+                text_file_path = os.path.abspath(text_file)
+                text_file_content = self.__read_text_file(text_file_path)
+                if text_file_content:
+                    with self.console.status("") as _:
+                        content = self.__anonymize_text(text_file_content)
+                    filename = f"anonymized_{text_file}"
+                    self.__save_text_file(filename, content)
+                    self.line_prefix(f"Anonymized text saved to {filename}")
+
             self.line("")
 
         except Exception:
             self.line_prefix("<error>An error occurred while anonymizing data.</>")
+
+    def __anonymize_text(self, text: str) -> str:
+        template = self.__get_template_anonymize()
+        chain = load_chain(template, self.provider.chat_model)
+        return chain.invoke({"text": text})
+
+    def __read_text_file(self, file_path: str) -> str:
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as file:
+                return file.read()
+        self.line_prefix("<error>Text file not found</>")
+        return ""
+
+    def __save_text_file(self, filename: str, content: str) -> bool:
+        text_file_path = os.path.abspath(filename)
+        with open(text_file_path, "w", encoding="utf-8") as file:
+            file.write(content)
 
     def __get_template_anonymize(self) -> str:
         return """

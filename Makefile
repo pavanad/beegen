@@ -7,6 +7,8 @@ export PYTHONPATH = $PYTHONPATH:$(shell pwd)
 help:
 	@echo "\nUsage:"
 	@echo "make <command>"
+	@echo "\nExample:"
+	@echo "make run param='list'"
 	@echo "\nAvailable Commands:"
 	@echo "- run\t\t\t Run project"
 	@echo "- clean\t\t\t Run clean project"
