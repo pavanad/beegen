@@ -33,8 +33,18 @@ class SmartAnonymizeCommand(SmartBaseCommand):
 
         try:
             if text:
+
                 with self.console.status("") as _:
                     response = self.__anonymize_text(text)
+
+                if not response:
+                    self.line_prefix(
+                        "<error>An error occurred while anonymizing data.</>"
+                    )
+                    self.line_prefix(
+                        "<info>Please change the model or try again later.</>\n\n"
+                    )
+                    return
                 self.line_prefix("Anonymized text:\n")
                 self.print_markdown(f"```\n{response}\n```")
 
