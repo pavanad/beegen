@@ -162,3 +162,6 @@ cython_debug/
 .vscode
 poetry.lock
 mockfile.yml
+
+.DS_Store
+.python-version

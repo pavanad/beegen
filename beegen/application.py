@@ -6,6 +6,7 @@ from .commands.about import AboutCommand
 from .commands.configure import ConfigureCommand
 from .commands.mock import MockCreateCommand, MockRunCommand
 from .commands.smart import (
+    SmartAnonymizeCommand,
     SmartCreateVectorStoreCommand,
     SmartReadmeCommand,
     SmartRegexCommand,
@@ -48,6 +49,7 @@ class Application(BaseApplication):
             SnippetsRemoveCommand(),
             SnippetsUseCommand(),
             ConfigureCommand(),
+            SmartAnonymizeCommand(),
             SmartRegexCommand(),
             SmartReadmeCommand(),
             SmartCreateVectorStoreCommand(),
