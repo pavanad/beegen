@@ -87,20 +87,21 @@ class SmartCreateVectorStoreCommand(SmartBaseCommand):
             self.line_prefix(
                 f"Vector store created and saved to <comment>{'./data'}</>"
             )
-            self.__client_example()
+            self.__client_example(self.provider.embeddings_name)
 
         except Exception:
             self.line_prefix(
                 "<error>An error occurred while creating the vector store.</>"
             )
 
-    def __client_example(self):
-        example = """
+    def __client_example(self, embedding_model: str):
+        model = embedding_model if embedding_model else "mxbai-embed-large"
+        example = f"""
         from langchain_community.embeddings import OllamaEmbeddings
         from langchain_community.vectorstores import FAISS
 
         # load embeddings model
-        embeddings = OllamaEmbeddings(model="mxbai-embed-large")
+        embeddings = OllamaEmbeddings(model="{model}")
 
         # load the vector store
         db = FAISS.load_local(

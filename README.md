@@ -55,6 +55,101 @@ beegen configure
 
 ![](docs/images/commands/configure.gif)
 
+### Create a Mock API
+
+Generate a configuration file for a mock API:
+
+```bash
+beegen mock create
+```
+
+**Mockefile (template)**
+
+```yaml
+authentication:
+  key: 20s7ILRwS9eMU8sXQ1sT9WaxFQTJwK5usCz3P_Ium6E
+  name: X-API-Key
+  type: api_key
+description: BeeGen mockfile API example
+endpoints:
+- access: public
+  method: GET
+  path: /users
+  response:
+    body:
+    - email: john.doe@example.com
+      id: 1
+      name: John Doe
+    - email: jane.doe@example.com
+      id: 2
+      name: Jane Doe
+    status: 200
+- access: protected
+  method: POST
+  path: /user
+  request:
+  - description: The user ID
+    name: id
+    type: int
+  - description: The user name
+    name: name
+    type: str
+  - description: The user email
+    name: email
+```
+
+Run the mock API server:
+
+```bash
+beegen mock run
+```
+
+### Anonymize Sensitive Data
+
+Use the following command to anonymize sensitive data with generative AI to ensure privacy by masking identifiable information:
+
+```bash
+beegen smart anonymize-data "<your text>"
+```
+
+![](docs/images/commands/anonymize-data.gif)
+
+Anonymize sensitive data in files:
+
+```bash
+beegen smart anonymize-data --file data.txt
+```
+
+### Create a Vector Store
+
+Build a local vector store from specific files or directories:
+
+```bash
+beegen smart create-vectorstore <your path>
+```
+
+![](docs/images/commands/create-vectorestore.gif)
+
+### Generate a README
+
+Automatically generate a detailed README file for your project:
+
+```bash
+beegen smart readme <your path>
+```
+
+![](docs/images/commands/readme.gif)
+
+### Generate a Regex
+
+Generate a regular expression based on the provided value:
+
+```bash
+beegen smart regex "email@email.com" --language python
+```
+
+![](docs/images/commands/regex.gif)
+
 ### Full List of Commands
 
 To view the complete list of available commands, run:
@@ -63,3 +158,10 @@ To view the complete list of available commands, run:
 beegen list
 ```
 
+## Contributing
+
+Contributions to BeeGen are welcome! If you find a bug, have a feature request, or want to improve the code, please submit a pull request.
+
+## License
+
+BeeGen is licensed under the MIT License. See the [LICENSE](/LICENSE) file for more information.
