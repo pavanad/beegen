@@ -54,6 +54,9 @@ class SmartRegexCommand(SmartBaseCommand):
         Language:
         {language}
 
-        Reminder: Return only the regex and, if the user requests, the example
-        in the specified language without any comments.
+        Reminder: Return only the regex and, if requested by the user, an example
+        in the specified language. Both should be formatted using Markdown.
+        The regex must be enclosed in `code blocks`, and the example code in the
+        specified language should also be presented within its own `code block`.
+        No comments or additional explanations should be provided.
         """
