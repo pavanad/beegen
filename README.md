@@ -56,6 +56,11 @@ beegen configure
 
 ![](docs/images/commands/configure.gif)
 
+Supported models include:
+- **OpenAI:** Requires a valid OpenAI API key.
+- **Ollama:** You need to install the Ollama CLI tool locally and download the desired model for it to work. More details can be found at [Ollama's official site](https://ollama.com/).
+- **Gemini:** You can use the free model with a personal key. For more information, visit [Gemini's official site](https://aistudio.google.com/).
+
 ### Create a Mock API
 
 Generate a configuration file for a mock API:
