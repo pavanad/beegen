@@ -28,7 +28,7 @@ With Beegen, you can streamline your development process, improve code quality, 
 
 ## Installation
 
-You can install BeeGen in two ways:
+You can install BeeGen in three ways:
 
 [PyPI](https://pypi.org/project/beegen/)
 
@@ -41,6 +41,16 @@ Directly from the repository using [poetry](https://python-poetry.org/)
 ```bash
 poetry install
 ```
+
+Using pipx (recommended):
+
+```bash
+pipx install beegen
+```
+
+Why `pipx`?
+
+`pipx` installs BeeGen in an isolated environment, avoiding conflicts with other Python packages on your system. This is ideal for command-line tools.
 
 ## Usage
 
