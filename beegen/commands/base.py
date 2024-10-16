@@ -18,7 +18,7 @@ class BaseCommand(Command):
         text = self.PREFIX + text if text else ""
         self.line(text)
 
-    def ask_prefix(self, question: str, default: Any) -> Any:
+    def ask_prefix(self, question: str, default: Any | None = None) -> Any:
         question = self.PREFIX + question if question else ""
         return self.ask(question, default)
 
