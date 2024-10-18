@@ -150,7 +150,7 @@ class SmartReadmeCommand(SmartBaseCommand):
         - Perhaps a message for contribution.
 
         Language:
-        {language}        
+        {language}
         """
 
     def __save_readme(self, readme_text: str):
