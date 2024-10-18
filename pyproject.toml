@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "beegen"
-version = "0.1.3"
+version = "0.1.4"
 description = "BeeGen is an intelligent command-line tool designed to assist developers with everyday tasks, leveraging the power of generative AI."
 authors = ["Adilson Pavan <adilson.pavan@gmail.com>"]
 repository = "https://github.com/pavanad/beegen"
@@ -27,6 +27,7 @@ streamlit = "^1.35.0"
 streamlit-ace = "^0.1.1"
 pypdf = "^4.2.0"
 faiss-cpu = "^1.8.0"
+gitpython = "^3.1.43"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -131,12 +131,10 @@ class SmartReadmeCommand(SmartBaseCommand):
         List of directories and files:
         {project_details}
 
-        Language:
-        {language}
-
         Project files:
         {context_files}
 
+        IMPORTANT:
         Try to generate the following topics in the "README":
         - Place a message in italics stating that this README was generated with the
         BeeGen tool.
@@ -148,7 +146,11 @@ class SmartReadmeCommand(SmartBaseCommand):
         it may be too large).
         - Prerequisites or dependencies according to the technology and the
         analyzed files.
+        - Maybe instructions on how to use.
         - Perhaps a message for contribution.
+
+        Language:
+        {language}
         """
 
     def __save_readme(self, readme_text: str):
