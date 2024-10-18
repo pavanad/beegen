@@ -8,6 +8,7 @@ from .commands.mock import MockCreateCommand, MockRunCommand
 from .commands.smart import (
     SmartAnonymizeCommand,
     SmartCreateVectorStoreCommand,
+    SmartPullRequestDescriptionCommand,
     SmartReadmeCommand,
     SmartRegexCommand,
     SmartTranslateCommand,
@@ -55,5 +56,6 @@ class Application(BaseApplication):
             SmartCreateVectorStoreCommand(),
             SmartTranslateCommand(),
             UtilsChatCommand(),
+            SmartPullRequestDescriptionCommand(),
         ]
         return commands
