@@ -18,6 +18,10 @@ class SmartAnonymizeCommand(SmartBaseCommand):
 
     def handle(self) -> int:
         self.line("")
+
+        if not self.check_provider():
+            return
+
         self.line_prefix(
             "Loading model(LLM) from provider "
             f"<comment>{self.provider.provider_name}</>"
