@@ -22,6 +22,9 @@ class SmartTranslateCommand(SmartBaseCommand):
     def handle(self) -> int:
         self.line("")
 
+        if not self.check_provider():
+            return
+
         text = self.argument("text")
         language = self.option("language") or "English"
         self.line_prefix(f"Translating text into <info>{language}</>.")

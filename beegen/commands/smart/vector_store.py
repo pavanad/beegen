@@ -33,6 +33,9 @@ class SmartCreateVectorStoreCommand(SmartBaseCommand):
     def handle(self) -> int:
         self.line("")
 
+        if not self.check_provider():
+            return
+
         file_type = self.option("file-type")
         if file_type is None:
             file_type = self.choice(

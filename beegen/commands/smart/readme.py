@@ -24,6 +24,9 @@ class SmartReadmeCommand(SmartBaseCommand):
     def handle(self) -> int:
         self.line("")
 
+        if not self.check_provider():
+            return
+
         project_path = self.argument("project_path")
         if not os.path.exists(project_path):
             self.line_prefix(f"Project path <error>'{project_path}'</> does not exist.")

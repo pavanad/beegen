@@ -24,6 +24,9 @@ class SmartPullRequestDescriptionCommand(SmartBaseCommand):
     def handle(self) -> int:
         self.line("")
 
+        if not self.check_provider():
+            return
+
         language = self.option("language") or "English"
         self.line_prefix(
             f"Generating pull request description into <info>{language}</>."
