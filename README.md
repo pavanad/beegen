@@ -1,15 +1,16 @@
-<p align="center">  
-  <img src="docs/images/beegen.png" alt="BeeGen">  
+<p align="center">
+  <img src="docs/images/beegen.png" alt="BeeGen">
 </p>
 <p align="center">
     <em>BeeGen is an intelligent command-line tool designed to assist developers with everyday tasks, leveraging the power of generative AI.</em>
 </p>
-<p align="center">    
+<p align="center">
     <a href="https://pypi.org/project/beegen/"><img alt="PyPI Latest Release" src="https://img.shields.io/pypi/v/beegen.svg"></a>
     <a href="https://pypi.org/project/beegen/"><img alt="PyPI Downloads" src="https://img.shields.io/pypi/dm/beegen.svg?label=PyPI%20downloads"></a>
     <a href="https://github.com/psf/black"><img alt="Code Style Black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
     <a href="https://pycqa.github.io/isort/"><img alt="Imports Isort" src="https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336"></a>
-    <a href="https://github.com/PyCQA/bandit"><img alt="Security Bandit" src="https://img.shields.io/badge/security-bandit-yellow.svg"></a>    
+    <a href="https://github.com/PyCQA/bandit"><img alt="Security Bandit" src="https://img.shields.io/badge/security-bandit-yellow.svg"></a>
+    <a href="https://pepy.tech/projects/beegen"><img src="https://static.pepy.tech/badge/beegen" alt="PyPI Downloads"></a>
 </p>
 
 ## BeeGen
